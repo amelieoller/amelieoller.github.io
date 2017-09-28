@@ -4,11 +4,11 @@ title:  "How I Built a Small Ruby/Sinatra Web App (Favorite Places)"
 date:   2017-09-25 18:13:45 -0400
 ---
 
-Creating a Ruby/Sinatra web app from scratch isn’t the easiest thing in the world, especially because in order to create a well structured one you have to follow many conventions and rules. This is great news though, it makes your job easier, because you don’t have to make those decisions that were already made for you.
+Creating a Ruby/Sinatra web app from scratch isn’t the easiest thing in the world, especially because in order to create a well-structured app you have to follow many conventions and rules. This is great news though - it makes your job easier, because you don’t have to make those decisions that were already made for you.
 
-Here I explain roughly how I set up my app ([Favorite Places](https://github.com/amelieoller/favorite-places)), the tools I used and the concepts around it.
+Here I explain roughly how I set up my app, [Favorite Places](https://github.com/amelieoller/favorite-places), the tools I used, and the concepts around it.
 
-This app lets you sign up and create your favorite places(place name, city, country). You can view, edit and delete your own entries but only view other people's entries. To install the app:
+This app lets you sign up and create your favorite places(place name, city, country). You can view, edit and delete your own entries and view other people's entries. To install the app:
 
 
 1. Clone the repo
@@ -17,9 +17,9 @@ This app lets you sign up and create your favorite places(place name, city, coun
 
 ## MVC (Model-View-Controller)
 
-It would be possible to create our application all in one file, with hundreds maybe thousands of lines of code in it - but that would get problematic quickly. You want to separate your application, so writing, reading and debugging becomes a lot easier and more pleasant - not just for you but possible contributors as well.
+It would be possible to create such an application all in one file, with hundreds, maybe thousands of lines of code in it - but that would get problematic quickly. You should separate your application so that writing, reading and debugging becomes a lot easier and more pleasant - not just for you but possible contributors as well.
 
-One popular *separation of concerns* structure is MVC or Model-View-Controller:
+One popular *separation of concerns* structure is Model-View-Controller or MVC:
 
 - Models: Models are the "brains” of your application, this is the place to manipulate your data.
 - Views: Views provide the user interface of your application, everything the user can see and interact with is stored in your views.
@@ -38,7 +38,7 @@ These are the naming conventions for an MVC folder structure:
 
 ## File/Folder Structure
 
-When you are staring with a blank file, it’s always nice to have some kind of template to lean on, so you don’t loose your mind completely. The folder structure I am outlining here is pretty standard and not necessarily specific to the application I built, therefore it can be used for many different Sinatra web projects.
+When you are staring with a blank file, it’s always nice to have some kind of template to lean on, so you don’t lose your mind completely. The folder structure I am outlining here is pretty standard and not necessarily specific to the application I built; therefore, it can be used for many different Sinatra web projects.
 
 ![Folder Structure](https://i.imgur.com/BAqihdf.png)
 
@@ -121,7 +121,7 @@ If we destroy an instance of our class that would be the *delete* action. This, 
 
 Databases can get pretty scary, that’s why we need help talking to them. Building our own methods to talk to our database is tedious and not necessary anymore - This is where ORM come in.
 
-ORM or Object Relational Mapping is the part that sits between your database and your application. The convention is to map (or equate) ruby classes with database tables and the instances of those classes with the rows of gthe table. ActiveRecord is a Ruby library that does exactly that, it connects classes to relational SQL Databases.
+ORM or Object Relational Mapping is the part that sits between your database and your application. The convention is to map (or equate) ruby classes with database tables and the instances of those classes with the rows of the table. ActiveRecord is a Ruby library that does exactly that - it connects classes to relational SQL Databases.
 
 So essentially ActiveRecord is an ORM that helps you deal with databases or as [rubyonrails.org](http://guides.rubyonrails.org/active_record_basics.html) explains it: “ActiveRecord is the M in MVC - the model - which is the layer of the system responsible for representing business data and logic.”
 
@@ -129,7 +129,7 @@ For this application I’m using the *sqlite3* database engine.
 
 ### Sinatra
 
-Sinatra is a Domain Specific Language for writing web applications. It is dependent on Rack (which creates the interface behind Sinatra) and an alternative to other frameworks such as Ruby on Rails but much more light-weight. In a nutshell Sinatra provides us with pre-written methods that we can use to turn for example our CLI application into a web application.
+Sinatra is a Domain Specific Language for writing web applications. It is dependent on Rack (which creates the interface behind Sinatra) and is an alternative to other frameworks such as Ruby on Rails but much more light-weight. In a nutshell, Sinatra provides us with pre-written methods that we can use to turn, for example, our CLI application into a web application.
 
 ### Git/Github
 
