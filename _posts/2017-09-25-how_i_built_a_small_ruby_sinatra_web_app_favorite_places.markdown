@@ -15,8 +15,6 @@ This app lets you sign up and create your favorite places(place name, city, coun
 2. run `rake db:migrate`
 3. run `shotgun` and open the provided link in your browser
 
-# MVC
-
 ## MVC (Model-View-Controller)
 
 It would be possible to create our application all in one file, with hundreds maybe thousands of lines of code in it - but that would get problematic quickly. You want to separate your application, so writing, reading and debugging becomes a lot easier and more pleasant - not just for you but possible contributors as well.
