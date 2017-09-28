@@ -15,7 +15,7 @@ This app lets you sign up and create your favorite places(place name, city, coun
 2. run `rake db:migrate`
 3. run `shotgun` and open the provided link in your browser
 
-# MVC (Model-View-Controller)
+## MVC (Model-View-Controller)
 
 It would be possible to create our application all in one file, with hundreds maybe thousands of lines of code in it - but that would get problematic quickly. You want to separate your application, so writing, reading and debugging becomes a lot easier and more pleasant - not just for you but possible contributors as well.
 
@@ -36,71 +36,71 @@ These are the naming conventions for an MVC folder structure:
 | Controller    | plural            | app/controllers | songs_controller.rb  | SongsController |
 | Views         | plural            | app/views/songs | index.erb, show.erb… |                 |
 
-# File/Folder Structure
+## File/Folder Structure
 
 When you are staring with a blank file, it’s always nice to have some kind of template to lean on, so you don’t loose your mind completely. The folder structure I am outlining here is pretty standard and not necessarily specific to the application I built, therefore it can be used for many different Sinatra web projects.
 
 ![Folder Structure](https://i.imgur.com/BAqihdf.png)
 
 
-## The `app` Directory
+### The `app` Directory
 
 This directory holds the main part of our application, it neatly contains our models, views, and controllers.
 
 
-## The `models` Directory
+### The `models` Directory
 
 This folder contains our models, each model file represents a component of your application - in this case User, Place, and Country. The application controller is what ties the other controllers together and is generally required for an application such as this one. It contains the `configure` section and `helpers`.
 
 
-## The `views` Directory
+### The `views` Directory
 
 This directory holds different views, which the user is going to see. The views are again grouped into folders for each component. The index and layout (provides a layout for all your erb files) files in the main directory are not specific to any component.
 
 The views files are in the `[erb](http://www.stuartellis.name/articles/erb/)` [file format](http://www.stuartellis.name/articles/erb/) (Embedded Ruby) which allows you to write plane old html interspersed with Ruby elements.
 
 
-## The `config` Directory
+### The `config` Directory
 
 This contains your `environment.rb` file, connecting all of the files in our application to the appropriate gems and each other.
 
 
-## The `db` Directory
+### The `db` Directory
 
 This directory holds your database and database migrations. To create a new migration simply run `rake db:create_migration NAME=create_users` with the name to match your migration - and rake will create a migration for you with the appropriate time stamp.
 
 
-## The `public` Directory
+### The `public` Directory
 
 This holds the assets for your front end such as CSS styleheets, JavaScript files, and image files.
 
 
-## The `spec` Directory
+### The `spec` Directory
 
 If you were to run test for your application, this is where they would be stored.
 
 
-## The `config.ru` File
+### The `config.ru` File
 
 You need a `config.ru` when building Rack based applications. It loads your application environment, code, libraries, and specifies which controllers to load. 
 
 
-## The `Gemfile`
+### The `Gemfile`
 
 This holds a list of all the gems that are required for the application. Running `bundle install` in your command line will install all the listed gems and dependencies. To create a new `Gemfile` simply type `bundle init` in your command line (make sure your’re in your projects folder).
 
 
-## The `Rakefile` 
+### The `Rakefile` 
 
 In the `Rakefile` you can specify your own rake tasks. To see all of the rake tasks that are available to you simply run `rake -T`.
 
 
-## Other Files
+### Other Files
 
 You may want to add a `README.md` to your directory to help other programmers understand your application, figure out how to use it and learn how they may contribute. The `LICENSE.md` file contains your license. 
 
 
-# CRUD
+## CRUD
 
 CRUD is an acronym for Create, Read, Update, and Delete, these are the four basic functions of [persistent storage](https://en.wikipedia.org/wiki/Persistence_(computer_science)).
 
@@ -116,8 +116,8 @@ A controller action that renders and update form and another that receives the i
 **Delete**
 If we destroy an instance of our class that would be the *delete* action. This, as opposed to the others is only displayed as a delete button on the users end (for a specific instance).
 
-# Tools
-## ORM/ActiveRecord
+## Tools
+### ORM/ActiveRecord
 
 Databases can get pretty scary, that’s why we need help talking to them. Building our own methods to talk to our database is tedious and not necessary anymore - This is where ORM come in.
 
@@ -127,15 +127,15 @@ So essentially ActiveRecord is an ORM that helps you deal with databases or as [
 
 For this application I’m using the *sqlite3* database engine.
 
-## Sinatra
+### Sinatra
 
 Sinatra is a Domain Specific Language for writing web applications. It is dependent on Rack (which creates the interface behind Sinatra) and an alternative to other frameworks such as Ruby on Rails but much more light-weight. In a nutshell Sinatra provides us with pre-written methods that we can use to turn for example our CLI application into a web application.
 
-## Git/Github
+### Git/Github
 
 If you do decide to make your project public, I recommend using version control so other people can understand the changes you’ve made. Even if you don’t want anyone to see your code, it’s a great option for understanding your code after weeks, months or even years.
 
-# Stumbling Blocks
+## Stumbling Blocks
 
 One specific thing that I was trying to figure out for a while was how to delete a specific session message after you refresh a page. The problem I had was that upon refreshing a page and after a session message had already been loaded, it would just load again and again with each refresh. 
 
