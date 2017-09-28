@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "How I Built a Small Ruby/Sinatra Web App (Favorite Places)"
-date:   2017-09-25 22:13:44 +0000
+date:   2017-09-25 18:13:45 -0400
 ---
 
 Creating a Ruby/Sinatra web app from scratch isn’t the easiest thing in the world, especially because in order to create a well structured one you have to follow many conventions and rules. This is great news though, it makes your job easier, because you don’t have to make those decisions that were already made for you.
@@ -14,6 +14,7 @@ This app lets you sign up and create your favorite places(place name, city, coun
 1. Clone the repo
 2. run `rake db:migrate`
 3. run `shotgun` and open the provided link in your browser
+
 # MVC (Model-View-Controller)
 
 It would be possible to create our application all in one file, with hundreds maybe thousands of lines of code in it - but that would get problematic quickly. You want to separate your application, so writing, reading and debugging becomes a lot easier and more pleasant - not just for you but possible contributors as well.
