@@ -20,4 +20,4 @@ You can create a new quote with multiple applications (e.g. insulation in the wa
 
 But most of all: Have fun with it! Especially if you’re doing a project you choose and you’re passionate about it’ll all come a lot easier to you.
 
-[Link to the github repo.](https://github.com/amelieoller/insulation-quotes)
+[Link to the github repo](https://github.com/amelieoller/insulation-quotes)
