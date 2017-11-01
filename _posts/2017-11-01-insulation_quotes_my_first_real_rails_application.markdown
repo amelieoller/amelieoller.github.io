@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Insulation Quotes – My First “Real” Rails Application"
-date:       2017-11-01 23:47:51 +0000
+date:       2017-11-01 19:47:52 -0400
 permalink:  insulation_quotes_my_first_real_rails_application
 ---
 
@@ -19,3 +19,5 @@ You can create a new quote with multiple applications (e.g. insulation in the wa
 * It really helps me to create a seed file so I can see what my data is doing and I can imagine what the app will look like with some real world data.
 
 But most of all: Have fun with it! Especially if you’re doing a project you choose and you’re passionate about it’ll all come a lot easier to you.
+
+[Link to the github repo.](https://github.com/amelieoller/insulation-quotes)
