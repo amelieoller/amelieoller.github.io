@@ -1,18 +1,17 @@
 ---
 layout: post
-title:      "How to Deploy a New Rails App to Heroku Through Github"
-date:       2017-11-14 22:10:07 +0000
+title:      "How to Deploy a New Rails App to Heroku Through GitHub"
+date:       2017-11-14 17:10:08 -0500
 permalink:  how_to_deploy_a_new_rails_app_to_heroku_through_github
 ---
 
 
 
-How to Deploy a New Rails App to Heroku Through Github
-The following article takes you through all the steps from initializing your new Rails app to deploying it to Heroku through GitHub. There are a few extra steps, e.g. adding bootstrap and creating pages with content, which are not essential to this process but make things look nicer.
+The following article takes you through all the steps from initializing your new Rails app to deploying it to Heroku through GitHub. There are a few extra steps, e.g. adding bootstrap and creating pages with content, which are not essential to this process but make everything look a little nicer.
 
 ## Use PostgreSQL as Your Database
 
-When creating a new Rails application SQLite3 is the default database used. However you cannot use SQLite3 with Heroku, luckily for us, Rails also supports MySQL (including MariaDB) and PostgreSQL. Since PostgreSQL is the go-to database for Heroku, we will stick with that. To create a new Rails app and change the default database to PostgreSQL, type `rails new my-new-app --database=postgresql` in your terminal (replace ‘my-new-app’ with your apps name). `cd` into the new directory to get started.
+When creating a new Rails application SQLite3 is the default database used. However you [cannot use SQLite3 with Heroku](https://devcenter.heroku.com/articles/sqlite3), luckily for us, Rails also supports MySQL (including MariaDB) and PostgreSQL. Since PostgreSQL is the go-to database for Heroku, we will stick with that. To create a new Rails app and change the default database to PostgreSQL, type `rails new my-new-app --database=postgresql` in your terminal (replace ‘my-new-app’ with your apps name). `cd` into the new directory to get started.
 
 
 ![](https://i.imgur.com/YTZCDus.gif)
@@ -21,7 +20,7 @@ When creating a new Rails application SQLite3 is the default database used. Howe
 
 Create whichever pages you like - this is just to add some content so we can see if everything is working correctly. I started out with a simple greeting on the home page. In `config/routes.rb` add `root 'welcome#home'` and generate a new welcome controller with `rails g controller welcome`. Add a `home` action to your WelcomeController and a `home.html.erb` in the `app/views/welcome` folder with whatever text you like.
 
-Spin up a server with `rails s` and navigate to http://localhost:3000 to take a look at your new homepage.
+Spin up a server with `rails s` and navigate to [http://localhost:3000](http://localhost:3000) to take a look at your new homepage.
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_132578EB74DFFF7477D384C731B12DB70545F6A3CEF694B8DD483D80A8415074_1510445818780_Peek+2017-11-11+15-11+Add+some+pages+to+your+app.gif)
 
@@ -30,39 +29,39 @@ Spin up a server with `rails s` and navigate to http://localhost:3000 to take a 
 I like my applications to have at least a little styling from the start, to add bootstrap support simply add the following lines in these files:
 
 - In `app/assets/javascripts/application.js` add:
-    //= require jquery
+    ```//= require jquery
     //= require jquery_ujs
-    //= require bootstrap
+    //= require bootstrap```
 
 before `//= require_tree .`.
 
 
 - In `app/assets/stylesheets/application.css` add:
-     @import 'bootstrap-sprockets';
-     @import 'bootstrap';
+     ```@import 'bootstrap-sprockets';
+     @import 'bootstrap';```
 
 to the bottom of the file and rename the file to have the extension `.css.scss`.
 
 
 - Add these gems to your `Gemfile`:
-    gem 'bootstrap-sass'
-    gem 'jquery-rails'
+    ```gem 'bootstrap-sass'
+    gem 'jquery-rails'```
 
 and run `bundle install`.
 
-To see if this worked start up a server with `rails s` and navigate to http://localhost:3000, you should see the font change.
+To see if this worked start up a server with `rails s` and navigate to [http://localhost:3000](http://localhost:3000), you should see the font change.
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_132578EB74DFFF7477D384C731B12DB70545F6A3CEF694B8DD483D80A8415074_1510696336635_Peek+2017-11-11+15-23+Add+bootstrap+support.gif)
 
 ## Move Your Files Into a GitHub Repo
 
-Create a new repository on GitHub and copy its link. Run `git remote add origin https://github.com/your-name/your-new-app` (pasting your repo link) in your apps folder. Add all your files with `git add .` and commit with `git commit -m` `"``Initial commit``"` or whichever commit message you’d prefer. Push to Github with `git push origin master`. Next, we will link this repo to our Heroku app.
+Create a new repository on GitHub and copy its link. Run `git remote add origin https://github.com/your-name/your-new-app` (pasting your repo link). Add all your files with `git add .` and commit with `git commit -m "Initial commit"` or whichever commit message you’d prefer. Push to Github with `git push origin master`. Next, we will link this repo to our Heroku app.
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_132578EB74DFFF7477D384C731B12DB70545F6A3CEF694B8DD483D80A8415074_1510446037585_Peek+2017-11-11+15-26+Move+your+files+into+a+git+repo.gif)
 
 ## Deploy to Heroku
 
-Go to https://dashboard.heroku.com/apps and sign up for an account if you don’t have one yet. Push the Create New App button , name your new Heroku app and create it, then choose GitHub as your deployment method and type in your repo name. Choose Enable Automatic Deployments if you wish and hit Deploy Branch. The deployment will run for a little while so be patient. After that’s done a View button will pop up, click on it and check out your masterpiece.
+Go to [https://dashboard.heroku.com/apps](https://dashboard.heroku.com/apps) and sign up for an account if you haven't yet. Push the *Create New App* button , name your new Heroku app and create it, then choose GitHub as your deployment method and type in your repo name. Choose Enable Automatic Deployments if you wish and hit *Deploy Branch*. The deployment will run for a little while so be patient. After that’s done a View button will pop up, click on it and check out your masterpiece.
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_132578EB74DFFF7477D384C731B12DB70545F6A3CEF694B8DD483D80A8415074_1510446046312_Peek+2017-11-11+15-30+Deploy+to+heroku.gif)
 
