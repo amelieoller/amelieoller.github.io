@@ -11,7 +11,7 @@ The following article takes you through all the steps from initializing your new
 
 ## Use PostgreSQL as Your Database
 
-When creating a new Rails application SQLite3 is the default database used. However you [cannot use SQLite3 with Heroku](https://devcenter.heroku.com/articles/sqlite3), luckily for us, Rails also supports MySQL (including MariaDB) and PostgreSQL. Since PostgreSQL is the go-to database for Heroku, we will stick with that. To create a new Rails app and change the default database to PostgreSQL, type `rails new my-new-app --database=postgresql` in your terminal (replace ‘my-new-app’ with your apps name). `cd` into the new directory to get started.
+When creating a new Rails application SQLite3 is the default database used. However you [cannot use SQLite3 with Heroku](https://devcenter.heroku.com/articles/sqlite3), luckily for us, Rails also supports MySQL (including MariaDB) and PostgreSQL. Since PostgreSQL is the go-to database for Heroku, we will stick with that. To create a new Rails app and change the default database to PostgreSQL, type `rails new my-new-app --database=postgresql` in your terminal (replace ‘my-new-app’ with your app's name). `cd` into the new directory to get started.
 
 
 ![](https://i.imgur.com/YTZCDus.gif)
@@ -61,7 +61,7 @@ Create a new repository on GitHub and copy its link. Run `git remote add origin 
 
 ## Deploy to Heroku
 
-Go to [https://dashboard.heroku.com/apps](https://dashboard.heroku.com/apps) and sign up for an account if you haven't yet. Push the *Create New App* button , name your new Heroku app and create it, then choose GitHub as your deployment method and type in your repo name. Choose Enable Automatic Deployments if you wish and hit *Deploy Branch*. The deployment will run for a little while so be patient. After that’s done a View button will pop up, click on it and check out your masterpiece.
+Go to [https://dashboard.heroku.com/apps](https://dashboard.heroku.com/apps) and sign up for an account if you haven't yet. Push the *Create New App* button, name your new Heroku app and create it. Then choose GitHub as your deployment method and type in your repo name. Choose Enable Automatic Deployments if you wish and hit *Deploy Branch*. The deployment will run for a little while so be patient. After that’s done a View button will pop up, click on it and check out your masterpiece.
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_132578EB74DFFF7477D384C731B12DB70545F6A3CEF694B8DD483D80A8415074_1510446046312_Peek+2017-11-11+15-30+Deploy+to+heroku.gif)
 
@@ -90,7 +90,7 @@ Create a link to this page on your welcome home page `<%= link_to 'Item Index', 
 
 ### ...Back to Heroku
 
-Make sure you add, commit and push you new changes to GitHub. Now go back to your heroku app, if you have automatic deployment enabled, wait a while for everything to update and refresh your page, you should see your new content. In order to use the database on Heroku you have to run `rake db:migrate` in your Heroku console, then all your pages should work.
+Make sure you add, commit and push you new changes to GitHub. Now go back to your heroku app; if you have automatic deployment enabled, wait a while for everything to update and refresh your page; you should see your new content. In order to use the database on Heroku, you have to run `rake db:migrate` in your Heroku console and all your pages should work.
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_132578EB74DFFF7477D384C731B12DB70545F6A3CEF694B8DD483D80A8415074_1510446060104_Peek+2017-11-11+16-02+go+back+to+heroku.gif)
 
