@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "React + Redux App with Persistent Storage Through Rails API"
-date:       2017-12-18 19:08:14 +0000
+date:       2017-12-18 14:08:14 -0500
 permalink:  react_redux_app_with_persistent_storage_through_rails_api
 ---
 
