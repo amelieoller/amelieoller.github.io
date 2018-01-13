@@ -1,21 +1,30 @@
-# Site settings
-title: Amelie Oller
-header-img: img/home-bg.png
-email: amelieoller@gmail.com
-copyright_name: amelieoller
-description: > # this means to ignore newlines until "baseurl:"
-  Code, code, code
-baseurl: "" # the subpath of your site, e.g. /blog
-twitter_username: 
-github_username:  amelieoller
-learn_profile: amelieoller
-email_username: amelieoller@gmail.com
-
-# Build settings
+# Dependencies
 markdown: kramdown
 highlighter: rouge
-permalink: pretty
-paginate: 5
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 
-gems: [jekyll-paginate, jekyll-feed]
+# Setup
+title: Code
+tagline: Amelie Oller
+description: >-
+  My name is Amelie, I'm a Full-Stack Web Developer and I love code.
+permalink: '/:title'
+paginate: 5
+plugins:
+  - jekyll-feed
+  - jekyll-gist
+  - jekyll-paginate
+sidebar_home_link: true
+
+# Author
+author:
+  name: Amelie Oller
+  github: 'https://github.com/amelieoller'
+  linkedin: 'https://www.linkedin.com/in/amelieoller/'
+
+# Plugins
+disqus:
+  shortname: amelieoller
+algolia:
+  application_id: WH0DR124R6
+  index_name: amelieoller
+  search_only_api_key: 9deed4e992577accea6dc244cdcab480

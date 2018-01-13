@@ -1,0 +1,145 @@
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+
+<div id="search-searchbar"></div>
+<span class="algolia-logo icon">{% include svg/search-by-algolia-white.svg %}</span>
+<div id="search-hits"></div>
+
+<script>
+  const search = instantsearch({
+    appId: '{{ site.algolia.application_id }}',
+    apiKey: '{{ site.algolia.search_only_api_key }}',
+    indexName: '{{ site.algolia.index_name }}',
+    searchParameters: {
+      restrictSearchableAttributes: [
+        'title',
+        'content'
+      ]
+    }
+  });
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  const hitTemplate = function (hit) {
+    let date = '';
+    if (hit.date) {
+      date = ` &bull; ${moment.unix(hit.date).format('MMM D, YYYY')}`
+    }
+    const url = hit.url;
+    const type = capitalizeFirstLetter(hit.layout);
+    const title = hit._highlightResult.title.value;
+    const content = hit._highlightResult.html.value;
+
+    return `
+    <div class="post-item clearfix">
+      <h2><a class="post-link post-title" href="${url}">${title}</a></h2>
+      <span class="post-meta">${type}${date}</span>
+      <div class="post-snippet">${content}</div>
+    </div>
+    <hr>
+  `;
+  }
+
+  search.addWidget(
+    instantsearch.widgets.searchBox({
+      container: '#search-searchbar',
+      placeholder: 'Search posts...'
+    })
+  );
+
+  search.addWidget(
+    instantsearch.widgets.hits({
+      container: '#search-hits',
+      templates: {
+        item: hitTemplate
+      }
+    })
+  );
+
+  search.start();
+</script>
+
+<style>
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .ais-search-box {
+    max-width: 100% !important;
+  }
+
+  .post-link .ais-Highlight {
+    color: #ac4142;
+    font-style: normal;
+    text-decoration: underline;
+  }
+
+  .post-snippet .ais-Highlight {
+    color: #ac4142;
+    font-style: normal;
+    font-weight: bold;
+  }
+
+  .ais-search-box {
+    max-width: 100%;
+    margin-bottom: 10px;
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .ais-search-box--input {
+    padding-left: 24px;
+    height: 100%;
+    width: 100%;
+  }
+
+  .ais-search-box--reset {
+    background: 0 0;
+    position: absolute;
+    cursor: pointer;
+    top: 16px;
+    right: 16px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    color: white;
+  }
+
+  .ais-search-box--reset:hover {
+    background-color: white;
+    border-color: white;
+    transition: none, border-color none, background none;
+  }
+
+  .ais-hits--item hr {
+    margin: 0.5rem 0;
+  }
+
+  .ais-search-box--reset svg {
+    display: block;
+    width: 12px;
+    height: 12px;
+  }
+
+  .ais-search-box--magnifier svg {
+    display: none;
+  }
+
+  .algolia-logo {
+    float: right;
+    padding-right: 2px;
+  }
+
+  .algolia-logo path {
+    fill: #262626;
+  }
+
+  #search-hits {
+    padding-top: 20px;
+  }
+</style>
