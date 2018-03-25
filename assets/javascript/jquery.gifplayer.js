@@ -5,15 +5,14 @@
 * Released under the MIT license
 */
 
-(function (factory) {
-  if(typeof module === "object" && typeof module.exports === "object") {
-    module.exports = factory(require("jquery"));
-  } else {
-    factory(jQuery);
-  }
-}(function($) {
-
-	function GifPlayer(preview, options){
+(function(factory) {
+	if (typeof module === 'object' && typeof module.exports === 'object') {
+		module.exports = factory(require('jquery'));
+	} else {
+		factory(jQuery);
+	}
+})(function($) {
+	function GifPlayer(preview, options) {
 		this.previewElement = preview;
 		this.options = options;
 		this.animationLoaded = false;
@@ -22,16 +21,15 @@
 	GifPlayer.scopes = new Array();
 
 	GifPlayer.prototype = {
-
 		supportedFormats: ['gif', 'jpeg', 'jpg', 'png'],
 
-		activate: function(){
+		activate: function() {
 			var self = this;
-			if(this.previewElement.width() === 0){
-				setTimeout(function(){
+			if (this.previewElement.width() === 0) {
+				setTimeout(function() {
 					self.activate();
 				}, 100);
-			}else{
+			} else {
 				self.mode = self.getOption('mode');
 				self.wrap();
 				self.addSpinner();
@@ -40,54 +38,62 @@
 			}
 		},
 
-		wrap: function(){
+		wrap: function() {
 			this.previewElement.addClass('gifplayer-ready');
-			this.wrapper = this.previewElement.wrap("<div class='gifplayer-wrapper'></div>").parent();
+			this.wrapper = this.previewElement
+				.wrap("<div class='gifplayer-wrapper'></div>")
+				.parent();
 			this.wrapper.css('width', this.previewElement.width());
 			this.wrapper.css('height', this.previewElement.height());
-			this.previewElement.css('cursor','pointer');
+			this.previewElement.css('cursor', 'pointer');
 		},
 
-		addSpinner: function(){
+		addSpinner: function() {
 			this.spinnerElement = $("<div class = 'spinner'></div>");
 			this.wrapper.append(this.spinnerElement);
 			this.spinnerElement.hide();
 		},
 
-		getOption: function(option){
+		getOption: function(option) {
 			var dataOption = this.previewElement.data(option.toLowerCase());
-			if(dataOption != undefined && dataOption != ''){
+			if (dataOption != undefined && dataOption != '') {
 				return dataOption;
-			}else{
+			} else {
 				return this.options[option];
 			}
 		},
 
-		addControl: function(){
+		addControl: function() {
 			var label = this.getOption('label');
-			this.playElement = $("<ins class='play-gif'>" + label + "</ins>");
+			this.playElement = $("<ins class='play-gif'>" + label + '</ins>');
 			this.wrapper.append(this.playElement);
-			this.playElement.css('top', this.previewElement.height()/2 - this.playElement.height()/2);
-			this.playElement.css('left', this.previewElement.width()/2 - this.playElement.width()/2);
+			this.playElement.css(
+				'top',
+				this.previewElement.height() / 2 - this.playElement.height() / 2
+			);
+			this.playElement.css(
+				'left',
+				this.previewElement.width() / 2 - this.playElement.width() / 2
+			);
 		},
 
-		addEvents: function(){
+		addEvents: function() {
 			var gp = this;
 			var playOn = this.getOption('playOn');
 
-			switch(playOn){
+			switch (playOn) {
 				case 'click':
-					gp.playElement.on( 'click', function(e){
+					gp.playElement.on('click', function(e) {
 						gp.previewElement.trigger('click');
 					});
-					gp.previewElement.on( 'click', function(e){
+					gp.previewElement.on('click', function(e) {
 						gp.loadAnimation();
 						e.preventDefault();
 						e.stopPropagation();
 					});
 					break;
 				case 'hover':
-					gp.previewElement.on( 'click mouseover', function(e){
+					gp.previewElement.on('click mouseover', function(e) {
 						gp.loadAnimation();
 						e.preventDefault();
 						e.stopPropagation();
@@ -101,36 +107,35 @@
 			}
 		},
 
-		processScope: function(){
+		processScope: function() {
 			var scope = this.getOption('scope');
-			if( scope ){
-				if(GifPlayer.scopes[scope]){
+			if (scope) {
+				if (GifPlayer.scopes[scope]) {
 					GifPlayer.scopes[scope].stopGif();
 				}
 				GifPlayer.scopes[scope] = this;
 			}
 		},
 
-		loadAnimation: function(){
+		loadAnimation: function() {
 			this.processScope();
 
 			this.spinnerElement.show();
 
-			if( this.mode == 'gif'){
+			if (this.mode == 'gif') {
 				this.loadGif();
-			}else if(this.mode == 'video'){
-				if(!this.videoLoaded){
+			} else if (this.mode == 'video') {
+				if (!this.videoLoaded) {
 					this.loadVideo();
-				}else{
+				} else {
 					this.playVideo();
 				}
-
 			}
 			// Fire event onPlay
 			this.getOption('onPlay').call(this.previewElement);
 		},
 
-		stopGif: function(){
+		stopGif: function() {
 			this.gifElement.hide();
 			this.previewElement.show();
 			this.playElement.show();
@@ -138,41 +143,47 @@
 			this.getOption('onStop').call(this.previewElement);
 		},
 
-		getFile: function( ext ){
+		getFile: function(ext) {
 			// Obtain the resource default path
 			var gif = this.getOption(ext);
-			if(gif != undefined && gif != ''){
+			if (gif != undefined && gif != '') {
 				return gif;
-			}else{
+			} else {
 				replaceString = this.previewElement.attr('src');
 
 				for (i = 0; i < this.supportedFormats.length; i++) {
-					pattrn = new RegExp( this.supportedFormats[i]+'$', 'i' );
-					replaceString = replaceString.replace( pattrn, ext );
+					pattrn = new RegExp(this.supportedFormats[i] + '$', 'i');
+					replaceString = replaceString.replace(pattrn, ext);
 				}
 
 				return replaceString;
 			}
 		},
 
-		loadGif: function(){
+		loadGif: function() {
 			var gp = this;
 
 			gp.playElement.hide();
 
-			if(!this.animationLoaded){
+			if (!this.animationLoaded) {
 				this.enableAbort();
 			}
 			var gifSrc = this.getFile('gif');
 			var gifWidth = this.previewElement.width();
 			var gifHeight = this.previewElement.height();
 
-			this.gifElement=$("<img class='gp-gif-element' width='"+ gifWidth + "' height=' "+ gifHeight +" '/>");
+			this.gifElement = $(
+				"<img class='gp-gif-element' width='" +
+					gifWidth +
+					"' height=' " +
+					gifHeight +
+					" '/>"
+			);
 
 			var wait = this.getOption('wait');
-			if(wait){
+			if (wait) {
 				//Wait until gif loads
-				this.gifElement.load( function(){
+				this.gifElement.load(function() {
 					gp.animationLoaded = true;
 					gp.resetEvents();
 					gp.previewElement.hide();
@@ -180,7 +191,7 @@
 					gp.spinnerElement.hide();
 					gp.getOption('onLoadComplete').call(gp.previewElement);
 				});
-			}else{
+			} else {
 				//Try to show gif instantly
 				gp.animationLoaded = true;
 				gp.resetEvents();
@@ -188,22 +199,21 @@
 				gp.wrapper.append(gp.gifElement);
 				gp.spinnerElement.hide();
 			}
-			this.gifElement.css('cursor','pointer');
-			this.gifElement.css('position','absolute');
-			this.gifElement.css('top','0');
-			this.gifElement.css('left','0');
+			this.gifElement.css('cursor', 'pointer');
+			this.gifElement.css('position', 'absolute');
+			this.gifElement.css('top', '0');
+			this.gifElement.css('left', '0');
 			this.gifElement.attr('src', gifSrc);
-			this.gifElement.click( function(e){
+			this.gifElement.click(function(e) {
 				$(this).remove();
 				gp.stopGif();
 				e.preventDefault();
 				e.stopPropagation();
 			});
 			gp.getOption('onLoad').call(gp.previewElement);
-
 		},
 
-		loadVideo: function(){
+		loadVideo: function() {
 			this.videoLoaded = true;
 
 			var videoSrcMp4 = this.getFile('mp4');
@@ -211,40 +221,52 @@
 			var videoWidth = this.previewElement.width();
 			var videoHeight = this.previewElement.height();
 
-			this.videoElement = $('<video class="gp-video-element" width="' +
-				videoWidth + 'px" height="' + videoHeight + '" style="margin:0 auto;width:' +
-				videoWidth + 'px;height:' + videoHeight + 'px;" autoplay="autoplay" loop="loop" muted="muted" poster="' +
-				this.previewElement.attr('src') + '"><source type="video/mp4" src="' +
-				videoSrcMp4 + '"><source type="video/webm" src="' + videoSrcWebm + '"></video>');
+			this.videoElement = $(
+				'<video class="gp-video-element" width="' +
+					videoWidth +
+					'px" height="' +
+					videoHeight +
+					'" style="margin:0 auto;width:' +
+					videoWidth +
+					'px;height:' +
+					videoHeight +
+					'px;" autoplay="autoplay" loop="loop" muted="muted" poster="' +
+					this.previewElement.attr('src') +
+					'"><source type="video/mp4" src="' +
+					videoSrcMp4 +
+					'"><source type="video/webm" src="' +
+					videoSrcWebm +
+					'"></video>'
+			);
 
 			var gp = this;
 
-			var checkLoad = function(){
-				if(gp.videoElement[0].readyState === 4){
+			var checkLoad = function() {
+				if (gp.videoElement[0].readyState === 4) {
 					gp.playVideo();
 					gp.animationLoaded = true;
-				}else{
+				} else {
 					setTimeout(checkLoad, 100);
 				}
 			};
 
 			var wait = this.getOption('wait');
-			if(wait){
+			if (wait) {
 				checkLoad();
-			}else{
+			} else {
 				this.playVideo();
 			}
 
-			this.videoElement.on('click', function(){
-				if(gp.videoPaused){
+			this.videoElement.on('click', function() {
+				if (gp.videoPaused) {
 					gp.resumeVideo();
-				}else{
+				} else {
 					gp.pauseVideo();
 				}
 			});
 		},
 
-		playVideo: function(){
+		playVideo: function() {
 			this.spinnerElement.hide();
 			this.previewElement.hide();
 			this.playElement.hide();
@@ -257,7 +279,7 @@
 			this.getOption('onPlay').call(this.previewElement);
 		},
 
-		pauseVideo: function(){
+		pauseVideo: function() {
 			this.videoPaused = true;
 			this.videoElement[0].pause();
 			this.playElement.show();
@@ -265,29 +287,29 @@
 			this.getOption('onStop').call(this.previewElement);
 		},
 
-		resumeVideo: function(){
+		resumeVideo: function() {
 			this.videoPaused = false;
 			this.videoElement[0].play();
 			this.playElement.hide();
 			this.getOption('onPlay').call(this.previewElement);
 		},
 
-		enableAbort: function(){
+		enableAbort: function() {
 			var gp = this;
-			this.previewElement.click( function(e){
+			this.previewElement.click(function(e) {
 				gp.abortLoading(e);
 			});
-			this.spinnerElement.click( function(e){
+			this.spinnerElement.click(function(e) {
 				gp.abortLoading(e);
 			});
 		},
 
-		abortLoading: function(e){
+		abortLoading: function(e) {
 			this.spinnerElement.hide();
 			this.playElement.show();
 			e.preventDefault();
 			e.stopPropagation();
-			this.gifElement.off('load').on( 'load', function(ev){
+			this.gifElement.off('load').on('load', function(ev) {
 				ev.preventDefault();
 				ev.stopPropagation();
 			});
@@ -295,25 +317,22 @@
 			this.getOption('onStop').call(this.previewElement);
 		},
 
-		resetEvents: function(){
+		resetEvents: function() {
 			this.previewElement.off('click');
 			this.previewElement.off('mouseover');
 			this.playElement.off('click');
 			this.spinnerElement.off('click');
 			this.addEvents();
 		}
-
 	};
 
 	$.fn.gifplayer = function(options) {
-
 		// Check if we should operate with some method
 		if (/^(play|stop)$/i.test(options)) {
-
-			return this.each( function(){
+			return this.each(function() {
 				// Normalize method's name
 				options = options.toLowerCase();
-				if($(this).hasClass('gifplayer-ready')){
+				if ($(this).hasClass('gifplayer-ready')) {
 					//Setup gifplayer object
 					var gp = new GifPlayer($(this), null);
 					gp.options = {};
@@ -325,15 +344,15 @@
 					gp.videoElement = gp.wrapper.find('.gp-video-element');
 					gp.mode = gp.getOption('mode');
 
-					switch(options){
+					switch (options) {
 						case 'play':
 							gp.playElement.trigger('click');
 							break;
 						case 'stop':
-							if(!gp.playElement.is(':visible')){
-								if(gp.mode == 'gif'){
+							if (!gp.playElement.is(':visible')) {
+								if (gp.mode == 'gif') {
 									gp.stopGif();
-								}else if( gp.mode == 'video'){
+								} else if (gp.mode == 'video') {
 									gp.videoElement.trigger('click');
 								}
 							}
@@ -341,9 +360,9 @@
 					}
 				}
 			});
-
-		}else{ //Create instance
-			return this.each(function(){
+		} else {
+			//Create instance
+			return this.each(function() {
 				options = $.extend({}, $.fn.gifplayer.defaults, options);
 				var gifplayer = new GifPlayer($(this), options);
 				gifplayer.activate();
@@ -360,12 +379,11 @@
 		webm: '',
 		wait: false,
 		scope: false,
-		onPlay: function(){},
-		onStop: function(){},
-		onLoad: function(){},
-		onLoadComplete: function(){}
+		onPlay: function() {},
+		onStop: function() {},
+		onLoad: function() {},
+		onLoadComplete: function() {}
 	};
 
 	return GifPlayer;
-
-}));
+});

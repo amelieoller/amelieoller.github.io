@@ -17,8 +17,9 @@ code {
 }
 
 pre {
-  margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  overflow-x: auto;
+  padding: 0.8rem;
 }
 
 pre code {
@@ -34,11 +35,13 @@ pre code {
   line-height: 1.4;
   background-color: $gray-1;
 
-  pre {
-    margin-bottom: 0;
-    overflow-x: auto;
-    padding: 0.8rem;
-  }
+  // pre {
+  //   margin-top: 0;
+  //   margin-bottom: 1rem;
+  //   margin-bottom: 0;
+  //   overflow-x: auto;
+  //   padding: 0.8rem;
+  // }
 
   .lineno {
     display: inline-block;

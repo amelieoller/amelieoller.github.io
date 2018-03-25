@@ -9,7 +9,7 @@ description: >-
   My name is Amelie, I'm a Full-Stack Web Developer and I love code.
 permalink: '/:title'
 paginate: 5
-plugins:
+plugins_dir:
   - jekyll-feed
   - jekyll-gist
   - jekyll-paginate
@@ -28,3 +28,4 @@ algolia:
   application_id: WH0DR124R6
   index_name: amelieoller
   search_only_api_key: 9deed4e992577accea6dc244cdcab480
+gems: [jekyll-paginate]
